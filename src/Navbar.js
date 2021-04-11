@@ -18,17 +18,25 @@ function Navbar() {
         history.push("/login"); 
     }
 
+    const renderList = ()=>{
+        if(User){
+            return [
+                <li key="1"><a>  {User.Username}  </a></li>,
+                <li key="2"><Link to="/userstocks"> Your Stock Details </Link></li>,
+                <li key="3"><a onClick = {Logoutuser}> Logout </a></li>
+            ]
+        }else{
+            return []
+        }
+    }
+
     return (
         <div className="Navbar">
             <nav>
                 <div className="nav-wrapper">
                     <Link to="/" className="brand-logo"> Quikie <span className="small"> Apps </span>  </Link>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        {(User && (
-                            <li><a>  {User.Username}  </a></li>
-                        ))}
-                        <li><Link to="/userstocks"> Your Stock Details </Link></li>
-                        <li><a onClick = {Logoutuser}> Logout </a></li>
+                        { renderList() }
                     </ul>
                 </div>
             </nav>
