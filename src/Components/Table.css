@@ -1,0 +1,62 @@
+.stocks__table table tr th, .stocks__table table tr td{
+    padding: 1rem 2rem;
+}
+.stocks__table .container{
+    width: 90% !important;
+}
+.stocks__table .card th{
+    color: #78909c;
+}
+
+.stocks__table .card td{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #455a64;
+}
+
+.stocks__table .table__title{
+    font-weight: 400;
+    color: #455a64;
+    margin-top: 2rem;
+}
+
+.stocks__table .table__heading{
+    padding: 0 1.2rem;
+}
+.stocks__table .search__holder{
+    position: relative;
+}
+.stocks__table .search{
+    float: right;
+}
+.stocks__table .search i{
+    margin-left: -.5rem;
+}
+
+.stocks__table .pagination__container{
+    padding: .5rem;
+}
+.stocks__table .pagination__container span{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.stocks__table .pagination__container .active{
+    background: blue;
+}
+.stocks__table .chip{
+    color: blue;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stocks__table .pagination__container .pagination__button{
+    border: none;
+    background: transparent;
+}
+
+
+@media only screen and (max-width: 700px){
+    .stocks__table table tr th, .stocks__table table tr td{
+        padding: 1rem 1rem;
+    }
+}

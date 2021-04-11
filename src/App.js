@@ -1,25 +1,64 @@
-import logo from './logo.svg';
 import './App.css';
+import React  , { useEffect } from "react";
+import cookies from 'universal-cookie';
+import { Switch , Route , useHistory, BrowserRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Home from "./Screens/Home";
+import Navbar from "./Navbar";
+import Login from "./Screens/Login";
+import SignIn from "./Screens/Signup";
+import Userstock from "./Screens/UserStocks";
+import { RequestFunction } from "./store/UserAction";
 
-function App() {
+const Routing = () => {  
+  const history   = useHistory();
+  const Cookie    = new cookies();
+  const dispatch  = useDispatch();
+  useEffect(()=>{
+    const token   = localStorage.getItem("token");
+    let payload;
+    if(token){
+      payload     = token.split(".")[1];
+      payload     = JSON.parse(window.atob(payload));
+    }
+    if(!payload){
+      localStorage.clear();
+      Cookie.remove("token");
+      history.push("/login");
+    }else{
+      history.push("/");
+      dispatch(RequestFunction("get",`userbyid/${payload.data._id}`));
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/signup">
+        <SignIn />
+      </Route>
+      <Route exact path="/userstocks">
+        <Userstock />
+      </Route>
+    </Switch>
   );
 }
 
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routing/>  
+    </BrowserRouter>
+  )
+  
+};
+
 export default App;
+
